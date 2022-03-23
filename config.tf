@@ -34,7 +34,7 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/terraform_id_rsa.pub")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
 
@@ -45,3 +45,28 @@ output "internal_ip_address_vm_1" {
 output "external_ip_address_vm_1" {
   value = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
 }
+
+# pipeline {
+#     agent any
+#     tools {
+#         terraform 'terraform'
+#     }
+    
+#     stages {
+#         stage('Git checkout'){
+#             steps{
+#               git branch: 'main', url: 'https://github.com/htmldav/terraform.git'
+#             }
+#         }
+#         stage('Terraform init'){
+#             steps{
+#                 sh 'terraform init'
+#             }
+#         }
+#         stage('Terraform apply'){
+#             steps{
+#                 sh 'terraform apply --auto-approve'
+#             }
+#         }
+#     }
+# }
