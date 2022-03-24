@@ -78,6 +78,10 @@ output "external_ip_address_vm_1" {
 #         stage('echo dd_ip'){
 #             steps{
 #                 echo dd_ip
+#                 sh '''ssh -o StrictHostKeyChecking=no "ubuntu@${dd_ip}" << EOF
+# 	apt update
+# 	apt install python
+# EOF'''
 #             }
 #         }
 #     }
