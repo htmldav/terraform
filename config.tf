@@ -66,6 +66,18 @@ output "external_ip_address_vm_1" {
 #         stage('Terraform apply'){
 #             steps{
 #                 sh 'terraform apply --auto-approve'
+#                 script {
+#                     dd_ip = sh(
+#                         returnStdout: true, 
+#                         script: "terraform output external_ip_address_vm_1"
+#                     ).trim()      
+#                 }
+#             }
+#         }
+        
+#         stage('echo dd_ip'){
+#             steps{
+#                 echo dd_ip
 #             }
 #         }
 #     }
