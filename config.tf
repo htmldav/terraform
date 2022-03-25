@@ -48,10 +48,10 @@ output "external_ip_address_vm_1" {
 
 resource "local_file" "inventory" {
     filename = "./host.ini"
-    content     = << EOF
+    content     = <<EOF
     [build]
     ${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address}
-     EOF
+EOF
 }
 
 # pipeline {
