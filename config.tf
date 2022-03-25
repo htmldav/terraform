@@ -50,6 +50,6 @@ resource "local_file" "inventory" {
     filename = "./host.ini"
     content = <<-EOT
       [build]
-      ${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address}
+      "${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address}"
     EOT
 }
