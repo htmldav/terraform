@@ -46,10 +46,7 @@ output "external_ip_address_vm_1" {
   value = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
 }
 
-resource "local_file" "inventory" {
-    filename = "./host.ini"
-    content = <<-EOT
-      [build]
-      "${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address}"
-    EOT
+resource "local_file" "foo" {
+    content  = "foo!"
+    filename = "${path.module}/foo.bar"
 }
