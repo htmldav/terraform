@@ -48,49 +48,8 @@ output "external_ip_address_vm_1" {
 
 resource "local_file" "inventory" {
     filename = "./host.ini"
-    content     = <<EOF
-    [build]
-    ${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address}
-EOF
+    content = <<-EOT
+      [build]
+      ${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address}
+    EOT
 }
-
-# pipeline {
-#     agent any
-#     tools {
-#         terraform 'terraform'
-#     }
-    
-#     stages {
-#         stage('Git checkout'){
-#             steps{
-#               git branch: 'main', url: 'https://github.com/htmldav/terraform.git'
-#             }
-#         }
-#         stage('Terraform init'){
-#             steps{
-#                 sh 'terraform init'
-#             }
-#         }
-#         stage('Terraform apply'){
-#             steps{
-#                 sh 'terraform apply --auto-approve'
-#                 script {
-#                     dd_ip = sh(
-#                         returnStdout: true, 
-#                         script: "terraform output external_ip_address_vm_1"
-#                     ).trim()      
-#                 }
-#             }
-#         }
-        
-#         stage('echo dd_ip'){
-#             steps{
-#                 echo dd_ip
-#                 sh '''ssh -o StrictHostKeyChecking=no "ubuntu@${dd_ip}" << EOF
-# 	apt update
-# 	apt install python
-# EOF'''
-#             }
-#         }
-#     }
-# }
