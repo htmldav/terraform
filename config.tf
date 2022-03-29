@@ -36,6 +36,10 @@ resource "yandex_compute_instance" "vm-1" {
   metadata = {
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
+
+  provisioner "local-exec" {
+    command = "sudo apt install -y openssh-server && sudo systemctl enable ssh && sudo systemctl start ssh"
+  }
 }
 
 output "internal_ip_address_vm_1" {
