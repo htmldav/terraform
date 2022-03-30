@@ -36,10 +36,6 @@ resource "yandex_compute_instance" "vm-1" {
   metadata = {
     ssh-keys = "ubuntu:${file("~/meta.txt")}"
   }
-
-  provisioner "local-exec" {
-    command = "ansible-playbook -u jenkins --limit ${yandex_compute_instance.vm-1.network_interface.0.nat_ip_address} --private-key ~/.ssh/id_rsa -T 300 playbook.yml" 
-  }
 }
 
 output "internal_ip_address_vm_1" {
