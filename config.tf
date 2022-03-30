@@ -38,7 +38,7 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   provisioner "local-exec" {
-    command = "chmod 700 ~/.ssh; chmod 600 ~/.ssh/authorized_keys"
+    command = "sudo apt-get install -y openssh-server; sudo systemctl enable ssh; sudo systemctl start ssh; chmod 700 ~/.ssh; chmod 600 ~/.ssh/authorized_keys"
   }
 }
 
