@@ -1,0 +1,10 @@
+---
+- name: default-jdk
+  hosts: build
+  become: yes
+
+  tasks:
+  - name: Ensure maven is present
+    apt:
+     name: maven
+     state: present
