@@ -1,5 +1,5 @@
 ---
-- name: default-jdk
+- name: maven
   hosts: build
   become: yes
 
