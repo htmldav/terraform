@@ -38,6 +38,11 @@ resource "yandex_compute_instance" "vm-1" {
   }
 }
 
+resource "local_file" "foo" {
+    content  = "foo!"
+    filename = "${path.module}/foo.bar"
+}
+
 output "internal_ip_address_vm_1" {
   value = yandex_compute_instance.vm-1.network_interface.0.ip_address
 }
