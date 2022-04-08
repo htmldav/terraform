@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "yandex" {
-  token     = "AQAAAAAKvtVLAATuwSbAxJe__kfvqmHjQdZqggs"
+  # token     = "AQAAAAAKvtVLAATuwSbAxJe__kfvqmHjQdZqggs"
   service_account_key_file = file("/home/aldav/aldav.json")
   cloud_id  = "b1gle7sv6t64fseommi2"
   folder_id = "b1g5ttmlo94iceu07i72"
