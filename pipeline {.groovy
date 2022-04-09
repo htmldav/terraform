@@ -64,5 +64,11 @@ pipeline {
         //         sh "rm -f ~/.ssh/known_hosts"
         //     }
         // }
+
+        stage('ansible') { // наш деплой
+            steps { 
+                sh 'ansible --version' 
+            }
+        }
     }
 }
