@@ -65,9 +65,16 @@ pipeline {
         //     }
         // }
 
+
+        stage('ansiblebook checkout'){
+            steps{
+              git branch: 'main', url: 'https://github.com/htmldav/ansiblebookTest.git'
+            }
+        }
+
         stage('ansible') { // наш деплой
             steps { 
-                sh 'ansible --version' 
+                sh 'ansible-playbook playbook.yml' 
             }
         }
     }
