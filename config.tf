@@ -71,6 +71,17 @@ resource "yandex_compute_instance" "vm-2" {
   metadata = {
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
+
+  provisioner "remote-exec" {
+    inline = ["sudo apt update", "sudo apt install python -y", "echo Done!"]
+
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = file("~/.ssh/id_rsa")
+      host = self.network_interface[0].nat_ip_address
+    }
+  }
 }
 
 
