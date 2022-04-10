@@ -37,6 +37,10 @@ resource "yandex_compute_instance" "vm-1" {
   metadata = {
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
+
+  provisioner "remote-exec" {
+    inline = ["sudo apt update", "sudo apt install python -y", "echo Done!"]
+  }
 }
 
 # resource "local_file" "foo" {
