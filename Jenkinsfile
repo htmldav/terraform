@@ -32,21 +32,13 @@ pipeline {
             }
         }
         
-        stage('ssh python3 --version'){
-            steps{
-                retry(5) {
-                    sh "ssh -o StrictHostKeyChecking=no  ubuntu@${dd_ip1} python3 --version"
-                }
-            }
-        }
-        
         stage('ansiblebook checkout'){
             steps{
               git branch: 'main', url: 'https://github.com/htmldav/ansiblebookTest.git'
             }
         }
 
-        stage('ansible') { // наш деплой
+        stage('ansible') { 
             steps { 
                 withCredentials([sshUserPrivateKey(credentialsId: 'privateUbuntu', keyFileVariable: 'PRIVATE', usernameVariable: 'ubuntu')]) {
                     sh "ansible-playbook -u ubuntu -i ${dd_ip1}, playbook1.yml --private-key $PRIVATE"
