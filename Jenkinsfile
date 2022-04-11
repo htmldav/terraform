@@ -11,6 +11,14 @@ pipeline {
               git branch: 'main', url: 'https://github.com/htmldav/terraform.git'
             }
         }
+
+        stage('Terraform providers lock'){
+            steps{
+                sh 'terraform providers lock'
+            }
+        }
+
+
         stage('Terraform init'){
             steps{
                 sh 'terraform init'
