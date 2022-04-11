@@ -47,23 +47,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Terraform state list'){
-            steps{
-                sh 'terraform state list'
-            }
-        }
-
-        stage('Terraform state rm'){
-            steps{
-                sh 'terraform state rm yandex_compute_instance.vm[0]'
-            }
-        }
-
-        stage('Terraform new state list'){
-            steps{
-                sh 'terraform state list'
-            }
-        }                        
     }
 }
