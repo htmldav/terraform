@@ -57,3 +57,13 @@ output "external_ip_address_vm_1" {
 output "external_ip_address_vm_2" {
   value = yandex_compute_instance.vm.1.network_interface.0.nat_ip_address
 }
+
+resource "local_file" "hosts_inv" {
+  content = templatefile("${path.module}/hosts.tpl",
+    {
+      deploy = yandex_compute_instance.vm.0.network_interface.0.nat_ip_address
+      stage = yandex_compute_instance.vm.1.network_interface.0.nat_ip_address
+    }
+  )
+  filename = "../ansible/inventory/hosts.inv"
+}
