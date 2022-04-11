@@ -22,11 +22,11 @@ pipeline {
                 script {
                     dd_ip1 = sh(
                         returnStdout: true, 
-                        script: '"terraform output external_ip_address_vm"[0]'
+                        script: "terraform output external_ip_address_vm_1"
                     ).trim()
                     dd_ip2 = sh(
                         returnStdout: true, 
-                        script: '"terraform output external_ip_address_vm_2"[1]'
+                        script: "terraform output external_ip_address_vm_2"
                     ).trim()     
                 }
             }
