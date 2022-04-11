@@ -20,10 +20,10 @@ pipeline {
             steps{
                 sh 'terraform apply --auto-approve'
                 script {
-                    dd_ip = sh(
+                    String[] dd_ip = sh(
                         returnStdout: true, 
                         script: "terraform output external_ip_address_vm"
-                    ).trim()
+                    )//.trim()
                     // dd_ip2 = sh(
                     //     returnStdout: true, 
                     //     script: "terraform output external_ip_address_vm_2"
