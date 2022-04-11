@@ -20,15 +20,14 @@ pipeline {
             steps{
                 sh 'terraform apply --auto-approve'
                 script {
-                    def dd_ip=[]
-                    dd_ip = sh(
+                    dd_ip1 = sh(
                         returnStdout: true, 
-                        script: "terraform output external_ip_address_vm"
-                    )//.trim()
-                    // dd_ip2 = sh(
-                    //     returnStdout: true, 
-                    //     script: "terraform output external_ip_address_vm_2"
-                    // ).trim()     
+                        script: "terraform output external_ip_address_vm"[0]
+                    ).trim()
+                    dd_ip2 = sh(
+                        returnStdout: true, 
+                        script: "terraform output external_ip_address_vm_2"[1]
+                    ).trim()     
                 }
             }
         }
@@ -42,8 +41,8 @@ pipeline {
         stage('ansible') { 
             steps { 
                 withCredentials([sshUserPrivateKey(credentialsId: 'privateUbuntu', keyFileVariable: 'PRIVATE', usernameVariable: 'ubuntu')]) {
-                    sh "ansible-playbook -u ubuntu -i ${dd_ip[0]}, playbook1.yml --private-key $PRIVATE"
-                    sh "ansible-playbook -u ubuntu -i ${dd_ip[1]}, playbook2.yml --private-key $PRIVATE"
+                    sh "ansible-playbook -u ubuntu -i ${dd_ip1}, playbook1.yml --private-key $PRIVATE"
+                    sh "ansible-playbook -u ubuntu -i ${dd_ip2}, playbook2.yml --private-key $PRIVATE"
                 }
             }
         }
