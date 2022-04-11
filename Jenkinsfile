@@ -47,6 +47,11 @@ pipeline {
                 }
             }
         }
-        
+
+        stage('Terraform state list'){
+            steps{
+                sh 'terraform state list'
+            }
+        }        
     }
 }
