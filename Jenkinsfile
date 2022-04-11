@@ -52,6 +52,18 @@ pipeline {
             steps{
                 sh 'terraform state list'
             }
-        }        
+        }
+
+        stage('Terraform destroy'){
+            steps{
+                sh 'terraform destroy -target=yandex_compute_instance.vm[0]'
+            }
+        }
+
+        stage('Terraform new state list'){
+            steps{
+                sh 'terraform state list'
+            }
+        }                        
     }
 }
