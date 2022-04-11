@@ -54,9 +54,9 @@ pipeline {
             }
         }
 
-        stage('Terraform destroy'){
+        stage('Terraform state rm'){
             steps{
-                sh 'terraform destroy -target=yandex_compute_instance.vm[0]'
+                sh 'terraform state rm yandex_compute_instance.vm[0]'
             }
         }
 
