@@ -43,7 +43,7 @@ pipeline {
             steps { 
                 withCredentials([sshUserPrivateKey(credentialsId: 'privateUbuntu', keyFileVariable: 'PRIVATE', usernameVariable: 'ubuntu')]) {
                     sh "ansible-playbook -u ubuntu -i ${dd_ip1}, playbook1.yml --private-key $PRIVATE"
-                    //sh "ansible-playbook -u ubuntu -i ${dd_ip2}, playbook2.yml --private-key $PRIVATE"
+                    sh "ansible-playbook -u ubuntu -i ${dd_ip2}, playbook2.yml --private-key $PRIVATE"
                 }
             }
         }
